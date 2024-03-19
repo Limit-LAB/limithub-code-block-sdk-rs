@@ -57,11 +57,26 @@ pub struct ImageBase64 {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(tag = "portValueType", rename_all = "camelCase")]
 pub enum PortValue {
-    Bool { boolean_value: bool },
-    Int { int_value: i64 },
-    Float { float_value: f32 },
-    String { string_value: String },
-    Image { image_value: Image },
+    Bool {
+        #[serde(rename = "booleanValue")]
+        boolean_value: bool,
+    },
+    Int {
+        #[serde(rename = "integerValue")]
+        integer_value: i64,
+    },
+    Float {
+        #[serde(rename = "floatValue")]
+        float_value: f32,
+    },
+    String {
+        #[serde(rename = "stringValue")]
+        string_value: String,
+    },
+    Image {
+        #[serde(rename = "imageValue")]
+        image_value: Image,
+    },
 }
 
 impl PortValue {
@@ -69,8 +84,8 @@ impl PortValue {
         PortValue::Bool { boolean_value }
     }
 
-    pub fn new_int(int_value: i64) -> Self {
-        PortValue::Int { int_value }
+    pub fn new_integer(integer_value: i64) -> Self {
+        PortValue::Int { integer_value }
     }
 
     pub fn new_float(float_value: f32) -> Self {
