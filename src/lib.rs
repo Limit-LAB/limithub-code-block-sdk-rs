@@ -81,7 +81,7 @@ pub struct CodeBlockApp {
 }
 
 impl CodeBlockApp {
-    pub async fn serve<Fut>(
+    pub fn serve<Fut>(
         self,
         handler: fn(HashMap<String, PortValue>) -> Fut,
     ) -> impl Future<Output = io::Result<()>>

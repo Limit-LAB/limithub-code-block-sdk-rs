@@ -12,11 +12,11 @@ pub struct Port {
 }
 
 impl Port {
-    pub fn new(name: String, value_type: PortValueType) -> Self {
+    pub fn new(name: impl AsRef<str>, value_type: PortValueType) -> Self {
         Port {
             // determined by frontend
             id: String::new(),
-            name,
+            name: name.as_ref().to_owned(),
             port_value_type: value_type,
             default_value: None,
         }

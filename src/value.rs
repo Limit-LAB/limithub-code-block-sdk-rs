@@ -23,15 +23,20 @@ pub enum Image {
 }
 
 impl Image {
-    pub fn new_url(url: String, expired: u32) -> Self {
+    pub fn new_url(url: impl AsRef<str>, expired: u32) -> Self {
         Image::Url {
-            image_url: ImageUrl { url, expired },
+            image_url: ImageUrl {
+                url: url.as_ref().to_owned(),
+                expired,
+            },
         }
     }
 
-    pub fn new_base64(base64: String) -> Self {
+    pub fn new_base64(base64: impl AsRef<str>) -> Self {
         Image::Base64 {
-            image_base64: ImageBase64 { base64 },
+            image_base64: ImageBase64 {
+                base64: base64.as_ref().to_owned(),
+            },
         }
     }
 }
@@ -72,8 +77,10 @@ impl PortValue {
         PortValue::Float { float_value }
     }
 
-    pub fn new_string(string_value: String) -> Self {
-        PortValue::String { string_value }
+    pub fn new_string(string_value: impl AsRef<str>) -> Self {
+        PortValue::String {
+            string_value: string_value.as_ref().to_owned(),
+        }
     }
 
     pub fn new_image(image_value: Image) -> Self {
