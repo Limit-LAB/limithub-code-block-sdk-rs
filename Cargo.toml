@@ -2,6 +2,8 @@
 name = "limithub-code-block-sdk"
 version = "0.1.0"
 edition = "2021"
+license = "MIT"
+description = "Rust SDK of LimitHub Code Block."
 
 [dependencies]
 serde = { version = "1.0.197", features = ["derive"] }

@@ -36,11 +36,13 @@ impl CodeBlockAppBuilder {
         }
     }
 
+    /// Append input ports of the code block, it is required to have at least one input
     pub fn inputs(mut self, inputs: impl IntoIterator<Item = Port>) -> Self {
         self.inputs.extend(inputs);
         self
     }
 
+    // Append output ports of the code block
     pub fn outputs(mut self, outputs: impl IntoIterator<Item = Port>) -> Self {
         self.outputs.extend(outputs);
         self
@@ -81,6 +83,7 @@ pub struct CodeBlockApp {
 }
 
 impl CodeBlockApp {
+    /// Serve the code block
     pub fn serve<Fut>(
         self,
         handler: fn(HashMap<String, PortValue>) -> Fut,
