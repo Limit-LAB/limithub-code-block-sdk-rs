@@ -8,6 +8,7 @@ pub enum PortValueType {
     Float,
     String,
     Image,
+    History,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -44,14 +45,27 @@ impl Image {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct ImageUrl {
-    url: String,
-    expired: u32,
+    pub url: String,
+    pub expired: u32,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct ImageBase64 {
-    base64: String,
+    pub base64: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
+pub struct PromptEntry {
+    pub role: String,
+    pub body: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
+pub struct History {
+    pub histories: Vec<PromptEntry>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -76,6 +90,10 @@ pub enum PortValue {
     Image {
         #[serde(rename = "imageValue")]
         image_value: Image,
+    },
+    History {
+        #[serde(rename = "historyValue")]
+        history_value: History,
     },
 }
 
@@ -109,6 +127,7 @@ impl PortValue {
             PortValue::Float { .. } => PortValueType::Float,
             PortValue::String { .. } => PortValueType::String,
             PortValue::Image { .. } => PortValueType::Image,
+            PortValue::History { .. } => PortValueType::History,
         }
     }
 }
